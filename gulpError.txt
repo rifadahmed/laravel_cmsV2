@@ -1,0 +1,5 @@
+npm install gulp-sass --save-dev
+npm uninstall laravel-elixir
+npm uninstall session
+npm install — save laravel-elixir
+npm install — save session
