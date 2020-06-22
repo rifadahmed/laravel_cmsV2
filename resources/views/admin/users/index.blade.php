@@ -16,7 +16,8 @@
 
         @if ($users)
         @foreach ($users as $user)
-        <tr>
+        <tr><
+            /tr>
             <td>{{$user->id}}</td>
             <td>{{$user->name}}</td>
             <td>{{$user->email}}</td>
