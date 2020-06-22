@@ -24,11 +24,11 @@ class createUserRequest extends Request
     public function rules()
     {
         return [
-            'name'=>'required',
-            'email'=>'required | regex:/^.+@.+$/i',
-            'role'=>'required',
-            'status'=>'required',
-            'password'=>'required',
+            // 'name'=>'required',
+            // 'email'=>'required | regex:/^.+@.+$/i',
+            // 'role_id'=>'required',
+            // 'is_active'=>'required',
+            // 'password'=>'required',
         ];
     }
 }
