@@ -4,6 +4,7 @@
     <thead>
       <tr>
         <th>Id</th>
+        <th>Photo</th>
         <th>Name</th>
         <th>Email</th>
         <th>Role</th>
@@ -16,9 +17,23 @@
 
         @if ($users)
         @foreach ($users as $user)
-        <tr><
-            /tr>
+        
             <td>{{$user->id}}</td>
+
+            <td>
+              {{--  @if ($user->photo)
+              <img src="{{ URL::to('/') }}/images/{{$user->photo->file}}"  class="img-thumbnail" alt="Responsive image">
+              @else
+               image not found  
+              @endif  --}}
+                <img src="{{$user->photo?$user->photo->file : "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg"}}"class="img-thumbnail" alt="">
+            </td>
+           
+
+       
+            
+          
+           
             <td>{{$user->name}}</td>
             <td>{{$user->email}}</td>
             <td>{{$user->role->name}}</td>
