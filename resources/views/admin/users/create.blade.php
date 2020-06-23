@@ -3,7 +3,7 @@
 @section('content')
     create user
     {{-- action must be smaller letter --}}
-    {!! Form::open(['aethod' => 'post','action'=>'adminUsersController@store','files'=>true]) !!} 
+    {!! Form::open(['method' => 'post','action'=>'adminUsersController@store','files'=>true]) !!} 
     <div class="form-group">
 
     {!!Form::label('name',"Name");!!}
