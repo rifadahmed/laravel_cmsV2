@@ -28,7 +28,7 @@ class createUserRequest extends Request
             'email'=>'required | regex:/^.+@.+$/i',
             'role_id'=>'required',
             'is_active'=>'required',
-            'password'=>'required',
+            // 'password'=>'required',
         ];
     }
 }

@@ -52,7 +52,6 @@ class adminUsersController extends Controller
            
           
         }
-
         $input['password']=bcrypt($request->password);
         User::create($input); 
         return redirect('/admin/users');
@@ -89,9 +88,22 @@ class adminUsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(createUserRequest $request, $id)
     {
-        //
+      
+        $user=User::findOrFail($id);
+        $input=$request->all();
+       
+        if ($file=$request->file('photo_id')) {
+            $name=$file->getClientOriginalName();
+            $file->move('images',$name);
+            $photo=Photo::create(['file'=>$name]);
+            $input['photo_id']=$photo->id;
+        }
+        $input['password']=bcrypt($request->password);
+        $user->update($input);
+
+        return redirect('/admin/users');
     }
 
     /**

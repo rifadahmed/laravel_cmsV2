@@ -8,7 +8,7 @@
 
     <div class="col-sm-9">
     {{-- action must be smaller letter --}}
-    {!! Form::model($user,['method' => 'post','action'=>['adminUsersController@update',$user->id],'files'=>true]) !!} 
+    {!! Form::model($user,['method' => 'patch','action'=>['adminUsersController@update',$user->id],'files'=>true]) !!} 
     <div class="form-group">
 
     {!!Form::label('name',"Name");!!}
