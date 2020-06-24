@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class createUserRequest extends Request
+class updateUserRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,7 +28,6 @@ class createUserRequest extends Request
             'email'=>'required | regex:/^.+@.+$/i',
             'role_id'=>'required',
             'is_active'=>'required',
-            'password'=>'required',
         ];
     }
 }

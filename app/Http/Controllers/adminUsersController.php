@@ -9,6 +9,7 @@ use App\Photo;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Http\Requests\createUserRequest;
+use App\Http\Requests\updateUserRequest;
 
 class adminUsersController extends Controller
 {
@@ -88,7 +89,7 @@ class adminUsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(createUserRequest $request, $id)
+    public function update(updateUserRequest $request, $id)
     {
       
         $user=User::findOrFail($id);
@@ -114,6 +115,8 @@ class adminUsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+       $user=User::findOrFail($id);
+       $user->delete();
+     return redirect("/admin/users");
     }
 }

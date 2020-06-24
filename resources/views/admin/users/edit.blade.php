@@ -44,8 +44,15 @@
         </div>
 
      <div class="form-group">
-        {!!Form::submit('Create User',['class'=>"btn btn-primary"]);!!}
+        {!!Form::submit('Update User',['class'=>"btn btn-primary"]);!!}
+
+        
+    </div>
+{!! Form::close() !!}
         </div>
+
+      
+        
 
      
       @include('partials.error')
@@ -54,7 +61,10 @@
       
 {!! Form::close() !!}
 
-
-</div>
+    {!!Form::open(['method' => 'delete','action' => ['adminUsersController@destroy',$user->id]])!!}
+        
+            {!!Form::submit('Delete User',["style"=>"margin-top:-50px",'class'=>"btn btn-danger pull-right"]);!!}
+        
+    {!! Form::close() !!}
 
 @endsection
