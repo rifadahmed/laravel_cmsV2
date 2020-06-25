@@ -41,6 +41,7 @@
         <div class="form-group">
         {!!Form::label('password',"Password");!!}
         {!!Form::password('password', ['class' => 'form-control']);!!}
+       
         </div>
 
      <div class="form-group">
@@ -49,22 +50,22 @@
         
     </div>
 {!! Form::close() !!}
-        </div>
+       
 
-      
         
-
-     
-      @include('partials.error')
-    
-      
-      
 {!! Form::close() !!}
+    <div>
 
+    
     {!!Form::open(['method' => 'delete','action' => ['adminUsersController@destroy',$user->id]])!!}
         
-            {!!Form::submit('Delete User',["style"=>"margin-top:-50px",'class'=>"btn btn-danger pull-right"]);!!}
-        
+            {!!Form::submit('Delete User',['style'=>'margin-top:-50px','class'=>"btn btn-danger pull-right"]);!!}
+            <br>
+            
     {!! Form::close() !!}
+</div>
+@include('partials.error')
+</div>
+    
 
 @endsection

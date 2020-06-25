@@ -1,5 +1,10 @@
 @extends('layouts.admin')
 @section('content')
+
+  <p class="bg-danger">{{session('deleted_user')}}</p>
+  <p class="bg-primary">{{session('updated_user')}}</p>
+  <p class="bg-success">{{session('created_user')}}</p>
+
 <table class="table table-hover">
     <thead>
       <tr>
@@ -28,12 +33,7 @@
               @endif  --}}
                 <img src="{{$user->photo?$user->photo->file : "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg"}}"class="img-thumbnail" alt="">
             </td>
-           
-
        
-            
-          
-           
             <td><a href="{{route('admin.users.edit',$user->id)}}">{{$user->name}}</a> </td>
             <td>{{$user->email}}</td>
             <td>{{$user->role->name}}</td>
