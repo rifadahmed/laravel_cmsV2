@@ -4,8 +4,8 @@
     create user
     {{-- action must be smaller letter --}}
     {!! Form::open(['method' => 'post','action'=>'adminUsersController@store','files'=>true]) !!} 
+   
     <div class="form-group">
-
     {!!Form::label('name',"Name");!!}
     {!!Form::text('name',null, ['class' => 'form-control']);!!}
     </div>
@@ -39,7 +39,7 @@
 
      <div class="form-group">
         {!!Form::submit('Create User',['class'=>"btn btn-primary"]);!!}
-        </div>
+     </div>
 
      
       @include('partials.error')
