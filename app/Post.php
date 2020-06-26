@@ -17,7 +17,7 @@ class Post extends Model
         return $this->belongsTo('App\photo','photo_id');
     }
     public function category(){
-        return $this->belongsTo('App\Category','category');
+        return $this->belongsTo('App\Category','category_id');
     }
 
 }
