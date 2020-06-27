@@ -1,6 +1,15 @@
 @extends('layouts.admin')
 @section('content')
 <h1>Edit post</h1> 
+<div class="row">
+
+
+<div class="col-sm-3">
+    <img src="{{$post->photo?$post->photo->file : "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg"}}"class="img-thumbnail" alt="">
+</div>
+
+<div class="col-sm-9">
+    
 
 <div class="form-group">
 {!! Form::model($post,['method' => 'patch','action'=>['adminPostsController@update',$post->id],'files'=>true]) !!} 
@@ -41,4 +50,6 @@
     </div>
 @endsection
 
+</div>
+</div>
 </div>
