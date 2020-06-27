@@ -24,7 +24,7 @@
             {{-- <td><img class="img-thumbnail" src=" {{$post->user->photo->file}}" alt=""></td> --}}
             <td><img style="height:100px;width:100px"  src="{{$post->photo?$post->photo->file : "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg"}}"class="img-thumbnail" alt=""></td>
             <td>{{$post->category->name}}</td>
-            <td>{{$post->title}}</td>
+            <td> <a href="{{route('admin.posts.edit',$post->id)}}">{{$post->title}}</a> </td>
             <td>{{$post->body}}</td>
             <td>{{$post->created_at->diffForHumans()}}</td>
             <td>{{$post->updated_at->diffForHumans()}}</td>
