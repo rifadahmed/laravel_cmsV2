@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Role;
+use App\Post;
 
+use App\Role;
 use App\User;
 use App\Photo;
 use App\Http\Requests;
@@ -122,11 +123,27 @@ class adminUsersController extends Controller
      */
     public function destroy($id)
     {
-         $user=User::findOrFail($id);
-         $photo=public_path().$user->photo->file;
-         $user->delete();
-         Session::flash('deleted_user', "user has been deleted"); 
-         unlink($photo);   
+         $user=User::findOrFail($id);// finding user
+         $post=Post::where('user_id',$user->id)->get();//finding all posts of that user
+         $userPhoto=public_path().$user->photo->file;//finding user photo in directory
+        
+         foreach($post as $x)
+         {
+            unlink(public_path().$x->photo->file); //remove every post photo from directory
+            $x->photo->file; //finding post photo
+            $x->photo->delete();//deleting post photo
+            $x->delete();//deleting post
+         }
+         $user->delete(); //deleting user
+         $user->photo->delete();//deleting user photo
+         unlink($userPhoto);//deleting user photo from directory 
+
+        //   $user=User::findOrFail($id);// finding user
+        //   $userPhoto=public_path().$user->photo->file;//finding user photo in directory
+        //   $user->delete(); //deleting user
+
+        Session::flash('deleted_user', "user has been deleted");
         return redirect("/admin/users");
+
     }
 }
