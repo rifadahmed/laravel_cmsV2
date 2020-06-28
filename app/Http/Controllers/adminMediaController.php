@@ -38,7 +38,10 @@ class adminMediaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $file=$request->file('file');
+        $name=$file->getClientOriginalName();
+        $file->move('images',$name);
+        Photo::create(['file'=>$name]);
     }
 
     /**
@@ -83,6 +86,9 @@ class adminMediaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $photo=Photo::findOrFail($id);
+        unlink(public_path().$photo->file);
+        $photo->delete();
+        return redirect('admin/media');
     }
 }
