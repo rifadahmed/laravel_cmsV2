@@ -8,6 +8,8 @@ $baseDir = dirname($vendorDir);
 return array(
     'AddPhotoIdToUsersTable' => $baseDir . '/database/migrations/2020_06_22_165458_add_photo_id_to_users_table.php',
     'CreateCategoriesTable' => $baseDir . '/database/migrations/2020_06_27_044528_create_categories_table.php',
+    'CreateCommentRepliesTable' => $baseDir . '/database/migrations/2020_06_28_112233_create_comment_replies_table.php',
+    'CreateCommentsTable' => $baseDir . '/database/migrations/2020_06_28_112212_create_comments_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
     'CreatePhotosTable' => $baseDir . '/database/migrations/2020_06_22_175256_create_photos_table.php',
     'CreatePostsTable' => $baseDir . '/database/migrations/2020_06_27_044621_create_posts_table.php',
