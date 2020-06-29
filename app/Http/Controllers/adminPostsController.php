@@ -112,16 +112,18 @@ class adminPostsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-       
-         
+    {  
         $post=Post::findOrFail($id);
         $photo=public_path().$post->photo->file;
         $post->photo->delete();
         $post->delete();
         unlink($photo); 
         return redirect("admin/posts");
+    }
+    public function post($id)
+    {
+        $post=Post::findorFail($id);
 
-
+        return view('post',compact('post'));
     }
 }

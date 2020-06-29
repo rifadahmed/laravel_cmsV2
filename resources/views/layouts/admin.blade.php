@@ -142,6 +142,9 @@
                             <li>
                                 <a href="{{route("admin.posts.create")}}">Create Post</a>
                             </li>
+                            <li>
+                                <a href="{{route("admin.comments.index")}}">All commets</a>
+                            </li>
 
                         </ul>
                         <!-- /.nav-second-level -->
@@ -302,6 +305,8 @@
                         <li>
                             <a href="">Create Post</a>
                         </li>
+                        
+
 
                     </ul>
                     <!-- /.nav-second-level -->
