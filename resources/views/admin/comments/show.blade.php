@@ -1,6 +1,6 @@
+
 @extends('layouts.admin')
 @section('content')
-<h1>All comments</h1>
     
 <table class="table table-hover">
     <thead>
@@ -17,7 +17,7 @@
             <td>{{$comment->post->id}}</td>
             <td>{{$comment->author}}</td>
             <td>{{$comment->body}}</td>
-            <td><a href="{{route('home.post',$comment->post->id)}}">View Post</a></td>
+            <td><a href="{{route('home.post',$comment->post->id)}}">View</a></td>
             
             
             {!!Form::open(['method' => 'patch','action' => ['postCommentsController@update',$comment->id]])!!}
