@@ -17,7 +17,8 @@ class postCommentsController extends Controller
      */
     public function index()
     {
-        return view('admin.comments.index');
+        $comments=Comment::all();
+        return view('admin.comments.index',compact('comments'));
     }
 
     /**
@@ -84,7 +85,8 @@ class postCommentsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $comment=Comment::findOrFail($id)->update($request->all());
+        return redirect('admin/comments');
     }
 
     /**
@@ -95,6 +97,8 @@ class postCommentsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Comment::findOrFail($id)->delete();
+        return redirect()->back();
+
     }
 }
