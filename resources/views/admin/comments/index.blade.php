@@ -16,7 +16,7 @@
         <tr>
             <td>{{$comment->post->id}}</td>
             <td>{{$comment->author}}</td>
-            <td>{{$comment->body}}</td>
+            <td>{{substr($comment->body,0,20)}}...</td>
             <td><a href="{{route('home.post',$comment->post->id)}}">View Post</a></td>
             
             
