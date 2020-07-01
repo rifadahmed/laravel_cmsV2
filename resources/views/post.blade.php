@@ -62,16 +62,15 @@
     
     @foreach ($post->comments as $comment)
     @if ($comment->is_active)
-    <div class="media">
-        
-        <a class="pull-left" href="#">
-            
-            <img class="media-object" style="height: 40px" src="{{$post->user->photo->file}}" alt="">
+    <div class="media">   
+        <a class="pull-left" href="#">       
+            <img class="media-object" style="height: 40px" src="{{$comment->photo->file}}" alt="">
         </a>
         
+
         <div class="media-body">
             
-            <h4 class="media-heading">{{$post->user->name}}
+            <h4 class="media-heading">{{$comment->author}}
                 <small>{{$comment->created_at}}</small>
             </h4>
             {{$comment->body}}
