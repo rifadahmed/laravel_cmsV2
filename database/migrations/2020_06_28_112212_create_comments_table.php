@@ -18,9 +18,7 @@ class CreateCommentsTable extends Migration
             // primary key same unsigned() as foreign key
             $table->integer('post_id')->unsigned(); 
             $table->integer('is_active')->default(0);
-            $table->string('author');
-            $table->string('photo_id');
-            $table->string('email');
+            $table->integer('user_id');
             $table->string('body');
             $table->timestamps();
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');

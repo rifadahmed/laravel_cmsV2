@@ -18,8 +18,7 @@ class CreateCommentRepliesTable extends Migration
             // primary key same unsigned() as foreign key
             $table->integer('comment_id')->unsigned();
             $table->integer('is_active')->default(0);
-            $table->string('author');
-            $table->string('email');
+            $table->integer('user_id');
             $table->string('body');
             $table->timestamps();
             $table->foreign('comment_id')->references('id')->on('comments')->onDelete('cascade');

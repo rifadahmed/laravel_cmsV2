@@ -43,16 +43,15 @@ class postCommentsController extends Controller
         $user=Auth::user();
         $data=[
             'post_id'=>$request->post_id,
-            'author'=>$user->name,
-            'email'=>$user->email,
+            'user_id'=>$user->id,
             'body'=>$request->body,
             'is_active'=>$user->is_active,
-            'photo_id'=>$user->photo_id
 
         ];
         Comment::create($data);
         $request->session()->flash('comment_added','comment has been added');
         return redirect()->back();
+        
     }
 
     /**

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\CommentReply;
 
 use App\Http\Requests;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class commentRepliesController extends Controller
 {
@@ -36,7 +38,14 @@ class commentRepliesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user=Auth::user();
+        $data=[
+            'comment_id'=>$request->comment_id,
+            'user_id'=>$user->id,
+            'body'=>$request->body
+        ];
+        CommentReply::create($data);
+        return redirect()->back();
     }
 
     /**
