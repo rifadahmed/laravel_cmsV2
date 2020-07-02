@@ -1,11 +1,26 @@
 <?php
 
 namespace App;
-
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
+    use Sluggable;
+    protected $slugKeyName = 'alternate';
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source'   => 'title',
+                'onUpdate' => true
+            ],
+            'alternate' => [
+                'source' => 'subtitle',
+            ]
+        ];
+    }
     protected $fillable = [
         //mass assignment
         'user_id', 'photo_id', 'category_id','title','body'

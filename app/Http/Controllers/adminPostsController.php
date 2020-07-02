@@ -90,7 +90,10 @@ class adminPostsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(updatePostRequest $request, $id)
-    {   $user=Auth::user();
+    
+    {  
+        
+         $user=Auth::user();
         $input=$request->all();
         if($file=$request->file('photo_id'))
         {
@@ -101,6 +104,7 @@ class adminPostsController extends Controller
             
         }
         $post=Post::findOrFail($id);
+        $post->slug = null;
         $post->update($input);
        return redirect("admin/posts");
     }
@@ -120,9 +124,9 @@ class adminPostsController extends Controller
         unlink($photo); 
         return redirect("admin/posts");
     }
-    public function post($id)
+    public function post($slug)
     {
-        $post=Post::findorFail($id);
+        $post=Post::where('slug',$slug)->get();
 
         return view('post',compact('post'));
     }

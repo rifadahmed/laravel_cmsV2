@@ -5,27 +5,28 @@
     <!-- Blog Post -->
 
     <!-- Title -->
-    <h1>{{$post->title}}</h1>
+    
+    <h1>{{$post[0]->title}}</h1>
 
     <!-- Author -->
     <p class="lead">
-        by <a href="#">{{$post->user->name}}</a>
+        by <a href="#">{{$post[0]->user->name}}</a>
     </p>
 
     <hr>
 
     <!-- Date/Time -->
-    <p><span class="glyphicon glyphicon-time"></span> {{$post->created_at->diffForHumans()}}</p>
+    <p><span class="glyphicon glyphicon-time"></span> {{$post[0]->created_at->diffForHumans()}}</p>
 
     <hr>
 
     <!-- Preview Image -->
-    <img class="img-responsive" src="{{$post->photo->file}}" alt="">
+    <img class="img-responsive" src="{{$post[0]->photo->file}}" alt="">
 
     <hr>
 
     <!-- Post Content -->
-    <p>{{$post->body}}</p>
+    <p>{{$post[0]->body}}</p>
     <hr>
 
     <!-- Blog Comments -->
@@ -45,7 +46,7 @@
           <div class="form-group">
               
               <div class="form-group">
-                <input type="hidden"  name="post_id" value="{{$post->id}}">
+                <input type="hidden"  name="post_id" value="{{$post[0]->id}}">
                 {!!Form::textarea('body',null,['class' => 'form-control','rows'=>'4']);!!}
                 <br>
                 {!!Form::submit('Add comment',['class'=>'btn btn-primary'])!!}
@@ -59,7 +60,7 @@
     <div id="hideAndSeek" class="hide"  >
 
     
-        @foreach ($post->comments as $comment)
+        @foreach ($post[0]->comments as $comment)
         @if ($comment->is_active)
         <div class="media">   
             <a class="pull-left" href="#">       
@@ -77,7 +78,7 @@
                 
                 @foreach ($comment->commentReplies as $reply)
                 @if ($reply->is_active==1)
-                    <div class="media">
+                <div class="media">
                     
                     <a class="pull-left" href="#">
                         <img class="media-object" style="height: 40px" src="{{$reply->user->photo? $reply->user->photo->file : 'http://placehold.it/64x64'}}"alt="">
@@ -92,6 +93,7 @@
                     
                 </div>
                 @endif
+                
                 @endforeach  
                     <h4>Leave a Reply:</h4>
             {!!Form::open(['method' => 'post','action' => 'commentRepliesController@store'])!!}
