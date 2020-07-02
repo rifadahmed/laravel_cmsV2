@@ -76,6 +76,7 @@
                 <!-- Nested Comment -->
                 
                 @foreach ($comment->commentReplies as $reply)
+                @if ($reply->is_active==1)
                     <div class="media">
                     
                     <a class="pull-left" href="#">
@@ -90,6 +91,7 @@
                     </div> 
                     
                 </div>
+                @endif
                 @endforeach  
                     <h4>Leave a Reply:</h4>
             {!!Form::open(['method' => 'post','action' => 'commentRepliesController@store'])!!}
@@ -120,9 +122,18 @@
 
 @section('script')
 <script >
+    $flag=1;
     document.querySelector('#seeMore').addEventListener('click',function(){
         document.getElementById("hideAndSeek").classList.toggle('hide')
-        
+         if ($flag==1)
+        {document.getElementById("seeMore").text="hide Comments";
+        $flag=0;
+        }
+        else{
+        document.getElementById("seeMore").text="See all comments..."
+        $flag=1;
+        }
+  
         })
 </script>
 @endsection

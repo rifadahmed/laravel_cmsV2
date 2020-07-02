@@ -18,6 +18,8 @@
             <td>{{$comment->user->name}}</td>
             <td>{{substr($comment->body,0,20)}}...</td>
             <td><a href="{{route('home.post',$comment->post->id)}}">View Post</a></td>
+            <td><a href="{{route('admin.comment.replies.show',$comment->id)}}">View Replies</a></td>
+
             
             
             {!!Form::open(['method' => 'patch','action' => ['postCommentsController@update',$comment->id]])!!}
