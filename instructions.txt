@@ -1,0 +1,21 @@
+instructions to run
+1) go to C:\Windows\System32\drivers\etc
+open hosts as an adminstration
+paste the below lines:
+	127.0.0.1 localhost
+	127.0.0.1 laravel.test 
+
+2)go to C:\xampp\apache\conf\extra
+open httpd-vhosts.conf as an adminstration
+paste the below lines:
+
+	<VirtualHost *:80>
+    	DocumentRoot "C:/xampp/htdocs/laravel_test/public"
+    	ServerName laravel.test
+	</VirtualHost>
+
+3)open xammp start apache and MySQl server
+ 
+4)import the Database located in this project folder to php my admin.
+
+5)Go to the given URL (EX:laravel.test)
