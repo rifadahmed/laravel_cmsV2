@@ -34,7 +34,7 @@ class adminUsersController extends Controller
      */
     public function create()
     {
-        $roles=Role::lists('name','id')->all();
+        $roles=Role::pluck('name','id')->all();
         return view('admin.users.create',compact('roles'));
     }
 
@@ -82,7 +82,7 @@ class adminUsersController extends Controller
     public function edit($id)
     {
         $user=User::findOrFail($id);
-        $roles=Role::lists('name','id')->all();
+        $roles=Role::pluck('name','id')->all();
         return view('admin.users.edit',compact('user','roles'));
     }
 
@@ -125,7 +125,10 @@ class adminUsersController extends Controller
     {
          $user=User::findOrFail($id);// finding user
          $post=Post::where('user_id',$user->id)->get();//finding all posts of that user
-         $userPhoto=public_path().$user->photo->file;//finding user photo in directory
+         if(public_path().$user->photo->file){
+            $userPhoto=public_path().$user->photo->file;//finding user photo in directory
+         }
+         
         
          foreach($post as $x)
          {

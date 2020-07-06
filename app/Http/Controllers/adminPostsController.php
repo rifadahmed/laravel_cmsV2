@@ -32,7 +32,7 @@ class adminPostsController extends Controller
      */
     public function create()
     {
-        $categories=Category::lists('name','id')->all();
+        $categories=Category::pluck('name','id')->all();
         return view('admin.posts.create',compact('categories'));
     }
 
@@ -78,7 +78,7 @@ class adminPostsController extends Controller
     public function edit($id)
     {
         $post=Post::findOrFail($id);
-        $categories=Category::lists('name','id')->all();
+        $categories=Category::pluck('name','id')->all();
         return view('admin.posts.edit',compact('post','categories'));
     }
 
@@ -91,8 +91,7 @@ class adminPostsController extends Controller
      */
     public function update(updatePostRequest $request, $id)
     
-    {  
-        
+    {          
          $user=Auth::user();
         $input=$request->all();
         if($file=$request->file('photo_id'))

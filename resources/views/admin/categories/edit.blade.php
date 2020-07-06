@@ -16,6 +16,7 @@
     <div class="form-group">
         {!!Form::submit('Delete',['class'=>'btn btn-danger'])!!}
     </div>
+    @include('partials.error')
     {!! Form::close() !!}
 </div>
 

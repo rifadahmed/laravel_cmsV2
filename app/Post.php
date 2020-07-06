@@ -15,9 +15,6 @@ class Post extends Model
             'slug' => [
                 'source'   => 'title',
                 'onUpdate' => true
-            ],
-            'alternate' => [
-                'source' => 'subtitle',
             ]
         ];
     }

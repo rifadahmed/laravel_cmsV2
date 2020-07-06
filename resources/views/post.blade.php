@@ -21,7 +21,7 @@
     <hr>
 
     <!-- Preview Image -->
-    <img class="img-responsive" src="{{$post[0]->photo->file}}" alt="">
+    <img class="img-responsive" src="{{$post[0]->photo?$post[0]->photo->file:"https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg"}}" alt="">
 
     <hr>
 

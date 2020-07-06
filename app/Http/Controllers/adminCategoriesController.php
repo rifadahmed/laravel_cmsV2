@@ -6,6 +6,7 @@ use App\Category;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use App\Http\Requests\createCategoryRequest;
 
 class adminCategoriesController extends Controller
 {
@@ -35,7 +36,7 @@ class adminCategoriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(createCategoryRequest $request)
     {
 
         Category::create($request->all());
@@ -72,7 +73,7 @@ class adminCategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(createCategoryRequest $request, $id)
     {
         $category=Category::findOrFail($id);
         $category->update( $request->all());
