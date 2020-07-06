@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('content')
+@include('partials.textEditor')
 <h1>Edit post</h1> 
 <div class="row">
 

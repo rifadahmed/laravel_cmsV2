@@ -26,7 +26,7 @@
     <hr>
 
     <!-- Post Content -->
-    <p>{{$post[0]->body}}</p>
+    <p>{!! $post[0]->body !!}</p>
     <hr>
 
     <!-- Blog Comments -->
