@@ -27,6 +27,6 @@
  </div>
  @include('partials.error')
 {!! Form::close() !!}
-@endsection
 
 </div>
+@endsection
