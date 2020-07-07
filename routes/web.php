@@ -66,8 +66,10 @@ Route::group(['middleware' => 'admin'], function () {
         'store'=>'admin.media.store',
         'edit'=>'admin.media.edit',
         'update'=>'admin.media.update',
-        'delete'=>'admin.media.destroy',
+        // 'delete'=>'admin.media.destroy',
     ]]);
+
+    Route::delete('admin/delete/media','adminMediaController@bulkDelete');
     Route::resource('admin/comments', 'postCommentsController',['names'=>[
         'index'=>'admin.comments.index',
         'show'=>'admin.comments.show',
@@ -90,3 +92,6 @@ Route::group(['middleware' => 'admin'], function () {
 
 
 });
+
+
+

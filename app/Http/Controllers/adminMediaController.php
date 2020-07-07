@@ -91,4 +91,33 @@ class adminMediaController extends Controller
         $photo->delete();
         return redirect('admin/media');
     }
+     public function bulkDelete(Request $request)
+    {
+   
+           if(count($request->checkBoxArray)>0)
+        {
+            for($i =0;$i< count($request->checkBoxArray);$i++)
+            {
+                $photo=Photo::findOrFail($request->checkBoxArray[$i]);
+                unlink(public_path().$photo->file);
+                $photo->delete();
+            }
+            return redirect()->back();
+         
+        }
+          else  
+        {
+            $photo=Photo::findOrFail($request->single_delete);
+            unlink(public_path().$photo->file);
+            $photo->delete();
+            return redirect()->back();
+        }
+        
+
+        
+       
+
+    
+
+    }
 }
