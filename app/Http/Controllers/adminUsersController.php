@@ -135,7 +135,7 @@ class adminUsersController extends Controller
         
          foreach($post as $x)
          {
-            unlink("/home/rifayypf/cms.rifadahmed.com".$x->photo->file); //remove every post photo from directory
+            unlink(public_path().$x->photo->file); //remove every post photo from directory
             $x->photo->file; //finding post photo
             $x->photo->delete();//deleting post photo
             $x->delete();//deleting post

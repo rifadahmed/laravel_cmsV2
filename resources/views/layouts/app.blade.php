@@ -50,13 +50,13 @@
                     <li><a href="{{ url('/home') }}">Home</a></li>
                 </ul>
 
-                @if (Auth::check() && Auth::user()->role_id==1 && Auth::user()->is_active==1)
+                @if (Auth::check() && Auth::user()->role->name=='admin' && Auth::user()->is_active==1)
                 
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('admin/users') }}">Dasboard</a></li>
                 </ul>  
                 @endif
-                
+               
                 
             
 
