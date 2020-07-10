@@ -56,6 +56,7 @@ class adminPostsController extends Controller
         }
         $user->posts()->create($input);
          return redirect('admin/posts');
+       
     }
 
     /**
@@ -117,11 +118,18 @@ class adminPostsController extends Controller
     public function destroy($id)
     {  
         $post=Post::findOrFail($id);
-        $photo=public_path().$post->photo->file;
-        $post->photo->delete();
+        //  $photo="/home/rifayypf/cms.rifadahmed.com".$post->photo->file;
+        if($post->photo){
+            $photo=public_path().$post->photo->file;
+            $post->photo->delete();
+            
+            unlink($photo); 
+            
+        }
         $post->delete();
-        unlink($photo); 
         return redirect("admin/posts");
+        
+     
     }
     public function post($slug)
     {

@@ -20,7 +20,7 @@
             <td>{{$reply->body}}</td>
             <td>{{$reply->user->name}}</td>
             
-            <td><a href="{{route('home.post',$reply->comment->post_id)}}">View Post</a></td>
+            <td><a href="{{route('home.post',$reply->comment->post->slug)}}">View Post</a></td>
             {!!Form::open(['method' => 'patch','action' => ['commentRepliesController@update',$reply->id]])!!}
             @if ($reply->is_active==1)
             <input type="hidden"  name="is_active" value="0">

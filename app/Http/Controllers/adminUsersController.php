@@ -125,14 +125,17 @@ class adminUsersController extends Controller
     {
          $user=User::findOrFail($id);// finding user
          $post=Post::where('user_id',$user->id)->get();//finding all posts of that user
-         if(public_path().$user->photo->file){
+        //  if("/home/rifayypf/cms.rifadahmed.com".$user->photo->file){
+            if(public_path().$user->photo->file){
+            // $userPhoto="/home/rifayypf/cms.rifadahmed.com".$user->photo->file;//finding user photo in directory
             $userPhoto=public_path().$user->photo->file;//finding user photo in directory
-         }
+
+        }
          
         
          foreach($post as $x)
          {
-            unlink(public_path().$x->photo->file); //remove every post photo from directory
+            unlink("/home/rifayypf/cms.rifadahmed.com".$x->photo->file); //remove every post photo from directory
             $x->photo->file; //finding post photo
             $x->photo->delete();//deleting post photo
             $x->delete();//deleting post
@@ -141,9 +144,7 @@ class adminUsersController extends Controller
          $user->photo->delete();//deleting user photo
          unlink($userPhoto);//deleting user photo from directory 
 
-        //   $user=User::findOrFail($id);// finding user
-        //   $userPhoto=public_path().$user->photo->file;//finding user photo in directory
-        //   $user->delete(); //deleting user
+          
 
         Session::flash('deleted_user', "user has been deleted");
         return redirect("/admin/users");

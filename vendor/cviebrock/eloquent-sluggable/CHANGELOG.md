@@ -1,5 +1,69 @@
 # Change Log
 
+## 4.2.4 - 04-Jul-2017
+
+- Documentation change (#374, thanks @fico7489)
+
+
+## 4.2.3 - 18-Apr-2017
+
+- Switch to allow extending the class (#356, thanks @haddowg)
+- Fix when adding suffixes to reserved slugs (#356, thanks @haddowg)
+
+
+## 4.2.2 - 23-Mar-2017
+
+- Better handling of numeric and boolean slug sources (#351, thanks @arturock)
+
+
+## 4.2.1 - 01-Feb-2017
+
+- Support Laravel 5.4 (#339, thanks @maddhatter)
+
+
+## 4.1.2 - 09-Nov-2016
+
+- Fix in `getExistingSlugs` when using global scopes (#327)
+- Update `Cocur\Slugify` to `^2.3`.
+
+
+## 4.1.1 - 12-Oct-2016
+
+- Fix for slugs updating when they don't need to, when using `onUpdate` with `unique` (#317) 
+
+
+## 4.1.0 - 14-Sep-2016
+
+- The goal of the 4.1.x releases will be to focus on support in Laravel 5.3, only providing support for 5.1/5.2
+  where it is easy and doesn't affect performance significantly.
+- Drop support for PHP <5.6 and HHVM (no longer supported by Laravel 5.3); fixes test build process
+
+
+## 4.0.4 - 13-Sep-2016
+
+- Fix `SluggableScopeHelpers` to work when using the short configuration syntax (#314).
+
+
+## 4.0.3 - 15-Jul-2016
+
+- Added `$config` argument to `SlugService::createSlug` method for optionally overriding 
+  the configuration for a statically generated slug (#286).
+
+
+## 4.0.2 - 17-Jun-2016
+
+- Added  `SluggableScopeHelpers` trait which restores some of the scoping and query
+  functionality of the 3.x version of the package (#280, thanks @unstoppablecarl and @Keoghan).
+- Added the `onUpdate` configuration option back to the package.
+- Updated the documentation to show usage of the `SluggableScopeHelpers` trait, and
+  how to use route model binding with slugs.
+
+
+## 4.0.1 - 13-Jun-2016
+
+- Fixed several bugs related to Laravel 5.1 and collections (#263, #274).
+
+
 ## 4.0.0 - 10-Jun-2016
 
 - Fix for Laravel 5.1 (#263 thanks @roshangautam and @andregaldino).
@@ -22,8 +86,8 @@
   - Removed artisan command to add slug column to tables.  You will need to do this
     (pretty simple) task yourself now. 
   - Several bug fixes.
-- See [UPGRADING.md] for details.
-  
+- See [UPGRADING.md](UPGRADING.md) for details.
+
 
 ## 3.1.4 - 03-Jan-2016
 
@@ -124,7 +188,7 @@
 
 ## 1.0.8 - 20-Feb-2014
 
-- Fix issue where replicated models couldn't forceably be reslugged (#20 thanks @trideout).
+- Fix issue where replicated models couldn't forcibly be re-slugged (#20 thanks @trideout).
 
 
 ## 1.0.7 - 03-Dec-2013

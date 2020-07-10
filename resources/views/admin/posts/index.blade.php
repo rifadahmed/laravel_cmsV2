@@ -21,9 +21,9 @@
         @foreach ($posts as $post)
         <tr>
             <td>{{$post->id}}</td>
-            <td>{{$post->user->name}}</td>
+              <td>   {{$post->user->name}} </td>
             <td><img style="height:100px;width:100px"  src="{{$post->photo?$post->photo->file : "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg"}}"class="img-thumbnail" alt=""></td>
-            <td>{{$post->category->name}}</td>
+            <td>{{$post->category->name}}
             <td> <a href="{{route('home.post',$post->slug)}}">{{$post->title}}</a> </td>
             <td>{{substr($post->body,0,10)}}...</td>
             <td>{{$post->created_at->diffForHumans()}}</td>

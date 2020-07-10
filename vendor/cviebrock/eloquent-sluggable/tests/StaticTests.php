@@ -13,8 +13,6 @@ class StaticTests extends TestCase
 
     /**
      * Test that we can generate a slug statically.
-     *
-     * @test
      */
     public function testStaticSlugGenerator()
     {
@@ -24,8 +22,6 @@ class StaticTests extends TestCase
 
     /**
      * Test that we generate unique slugs in a static context.
-     *
-     * @test
      */
     public function testStaticSlugGeneratorWhenEntriesExist()
     {
@@ -34,5 +30,17 @@ class StaticTests extends TestCase
 
         $slug = SlugService::createSlug(Post::class, 'slug', 'My Test Post');
         $this->assertEquals('my-test-post-1', $slug);
+    }
+
+    /**
+     * Test that we can generate a slug statically with different configuration.
+     */
+    public function testStaticSlugGeneratorWithConfig()
+    {
+        $config = [
+            'separator' => '.'
+        ];
+        $slug = SlugService::createSlug(Post::class, 'slug', 'My Test Post', $config);
+        $this->assertEquals('my.test.post', $slug);
     }
 }

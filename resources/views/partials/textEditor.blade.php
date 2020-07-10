@@ -1,5 +1,9 @@
 <script src="https://cdn.tiny.cloud/1/1i42wl0pm3xhb5ahw3nagd6b1lzfgf4ffyh5kmqyodacw9ip/tinymce/4/tinymce.min.js" referrerpolicy="origin"></script>
 
+<style>
+  #mceu_39 {display:none!important;}
+</style>
+
 <script>
   var editor_config = {
     path_absolute : "/",

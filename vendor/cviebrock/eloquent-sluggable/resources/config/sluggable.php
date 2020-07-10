@@ -103,11 +103,24 @@ return [
      * In the case of a slug that gets generated with one of these reserved names,
      * we will do:
      *
-     *    $slug .= $seperator + "1"
+     *    $slug .= $separator + "1"
      *
      * and continue from there.
      */
 
     'reserved' => null,
+
+    /**
+     * Whether to update the slug value when a model is being
+     * re-saved (i.e. already exists).  Defaults to false, which
+     * means slugs are not updated.
+     *
+     * Be careful! If you are using slugs to generate URLs, then
+     * updating your slug automatically might change your URLs which
+     * is probably not a good idea from an SEO point of view.
+     * Only set this to true if you understand the possible consequences.
+     */
+    
+    'onUpdate' => false,
 
 ];

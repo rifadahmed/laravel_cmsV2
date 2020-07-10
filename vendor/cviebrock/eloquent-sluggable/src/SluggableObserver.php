@@ -4,6 +4,11 @@ use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class SluggableObserver
+ *
+ * @package Cviebrock\EloquentSluggable
+ */
 class SluggableObserver
 {
 
@@ -75,6 +80,13 @@ class SluggableObserver
      */
     protected function fireSluggedEvent(Model $model, $status)
     {
-        $this->events->fire('eloquent.slugged: ' . get_class($model), [$model, $status]);
+        if (method_exists($this->events, 'fire')) {
+            // Up to Laravel 5.3, use fire()
+            $this->events->fire('eloquent.slugged: ' . get_class($model), [$model, $status]);
+        } else {
+            // Laravel 5.4+, use dispatch()
+            $this->events->dispatch('eloquent.slugged: ' . get_class($model), [$model, $status]);
+        }
+        
     }
 }

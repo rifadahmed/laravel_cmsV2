@@ -26,14 +26,14 @@ class User extends Authenticatable
     ];
 
     public function role(){
-        return $this->belongsTo('App\role','role_id');
+        return $this->belongsTo('App\Role','role_id');
     }
 
     public function photo(){
-        return $this->belongsTo('App\photo');
+        return $this->belongsTo('App\Photo');
     }
     public function posts(){
-        return $this->hasMany('App\Post');
+        return $this->hasMany('App\Post','user_id');
     }
 
     

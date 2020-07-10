@@ -15,9 +15,9 @@
         @foreach ($comments as $comment)
         <tr>
             <td>{{$comment->post->id}}</td>
-            <td>{{$comment->author}}</td>
+            <td>{{$comment->user->name}}</td>
             <td>{{$comment->body}}</td>
-            <td><a href="{{route('home.post',$comment->post->id)}}">View</a></td>
+            <td><a href="{{route('home.post',$comment->post->slug)}}">View</a></td>
             
             
             {!!Form::open(['method' => 'patch','action' => ['postCommentsController@update',$comment->id]])!!}

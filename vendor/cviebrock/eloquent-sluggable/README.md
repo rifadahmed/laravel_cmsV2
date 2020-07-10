@@ -5,8 +5,11 @@ Easy creation of slugs for your Eloquent models in Laravel 5.
 [![Build Status](https://travis-ci.org/cviebrock/eloquent-sluggable.svg?branch=master&format=flat)](https://travis-ci.org/cviebrock/eloquent-sluggable)
 [![Total Downloads](https://poser.pugx.org/cviebrock/eloquent-sluggable/downloads?format=flat)](https://packagist.org/packages/cviebrock/eloquent-sluggable)
 [![Latest Stable Version](https://poser.pugx.org/cviebrock/eloquent-sluggable/v/stable?format=flat)](https://packagist.org/packages/cviebrock/eloquent-sluggable)
-[![Latest Stable Version](https://poser.pugx.org/cviebrock/eloquent-sluggable/v/unstable?format=flat)](https://packagist.org/packages/cviebrock/eloquent-sluggable)
+[![Latest Unstable Version](https://poser.pugx.org/cviebrock/eloquent-sluggable/v/unstable?format=flat)](https://packagist.org/packages/cviebrock/eloquent-sluggable)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/cviebrock/eloquent-sluggable/badges/quality-score.png?format=flat)](https://scrutinizer-ci.com/g/cviebrock/eloquent-sluggable)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/0b966e13-6a6a-4d17-bcea-61037f04cfe7/mini.png)](https://insight.sensiolabs.com/projects/0b966e13-6a6a-4d17-bcea-61037f04cfe7)
+[![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+
 
 * [Background: What is a slug](#background-what-is-a-slug)
 * [Installation](#installation)
@@ -18,6 +21,7 @@ Easy creation of slugs for your Eloquent models in Laravel 5.
     * [includeTrashed](#includetrashed)
     * [maxLength](#maxLength)
     * [method](#method)
+    * [onUpdate](#onupdate)
     * [reserved](#reserved)
     * [separator](#separator)
     * [source](#source)
@@ -27,12 +31,10 @@ Easy creation of slugs for your Eloquent models in Laravel 5.
     * [customizeSlugEngine](#customizeslugengine)
     * [scopeWithUniqueSlugConstraints](#scopewithuniqueslugconstraints)
     * [scopeFindSimilarSlugs](#scopefindsimilarslugs)
+* [SluggableScopeHelpers Trait](#sluggablescopehelpers-trait)
+* [Route Model Binding](#route-model-binding)
 * [Bugs, Suggestions and Contributions](#bugs-suggestions-and-contributions)
 * [Copyright and License](#copyright-and-license)
-
-
-> **NOTE** If you are using Laravel 4, then use the `2.x` branch or tagged `2.*` releases. 
-> Currently, the `master` branch is only tested against Laravel 5.1 and 5.2.
 
 
 ## Background: What is a slug?
@@ -81,14 +83,32 @@ automatically, with minimal configuration.
 
 ## Installation
 
+> **NOTE**: Depending on your version of Laravel, you should install a different
+> version of the package:
+> 
+> | Laravel Version | Sluggable Version |
+> |:---------------:|:-----------------:|
+> |       4.x       |        2.x        |
+> |     5.1, 5.2    |        4.0        |
+> | 5.1†, 5.2†, 5.3 |        4.1        |
+> |       5.4       |       4.2.1‡      |
+>
+> † The 4.1 version _should_ work with Laravel 5.1 and 5.2, but might not in the future.
+>
+> ‡ The 4.2.0 version was short-lived and had some issues; please upgrade to 4.2.1
+>
+> Also note that different versions of the package have different configuration
+> settings.  See [UPGRADING.md](UPGRADING.md) for details.
+> 
+> Finally, the latest version of the package uses traits and few other "new" PHP
+> features, so you should be running PHP 5.6 or higher.  HHVM is not supported.
+
+
 First, you'll need to install the package via Composer:
 
 ```shell
-$ composer require cviebrock/eloquent-sluggable:~4.0@dev
+$ composer require cviebrock/eloquent-sluggable
 ```
-
-> **NOTE**: Eloquent-Sluggable uses traits and requires Laravel 5.1 or later,
-> so you will need to be running PHP 5.5.9 or higher.
 
 Then, update `config/app.php` by adding an entry for the service provider.
 
@@ -109,7 +129,7 @@ php artisan vendor:publish --provider="Cviebrock\EloquentSluggable\ServiceProvid
 ## Updating your Eloquent Models
 
 Your models should use the Sluggable trait, which has an abstract method `sluggable()`
- that you need to define.  This is where any model-specific configuration is set 
+that you need to define.  This is where any model-specific configuration is set 
 (see [Configuration](#configuration) below for details):
 
 ```php
@@ -181,7 +201,19 @@ $newPost = $post->replicate();
 // $newPost->slug is "my-awesome-blog-post-1"
 ```
 
+Note that empty strings, non-strings or other "odd" source values will result in different slugs:
 
+| Source Value | Resulting Slug        |
+|--------------|-----------------------|
+| string       | string                |
+| empty string | _no slug will be set_ |
+| `null`       | _no slug will be set_ |
+| `0`          | `"0"`                 |
+| `1`          | `"1"`                 |
+| `false`      | `"0"`                 |
+| `true`       | `"1"`                 |
+
+(The above values would be subject to any unique or other checks as well.)
 
 ## The SlugService Class 
 
@@ -202,6 +234,15 @@ This would be useful for Ajax-y controllers or the like, where you want to show 
 user what the unique slug _would_ be for a given test input, before actually creating
 a model.  The first two arguments to the method are the model and slug field being
 tested, and the third argument is the source string to use for testing the slug.
+
+You can also pass an optional array of configuration values as the fourth argument.
+These will take precedence over the normal configuration values for the slug field
+being tested.  For example, if your model is configured to use unique slugs, but you 
+want to generate the "base" version of a slug for some reason, you could do:
+
+```php
+$slug = SlugService::createSlug(Post::class, 'slug', 'My First Post', ['unique' => false]);
+```
 
 
 
@@ -319,8 +360,8 @@ class Book extends Eloquent
             'slug' => [
                 'source' => ['author.name', 'title']
             ]
-        ]
-    ];
+        ];
+    }
     
     public function author() {
         return $this->belongsTo(Author::class);
@@ -396,7 +437,24 @@ For example, to duplicate the default behaviour, you could do:
 
 Any other values for `method` will throw an exception.
 
-For more complex slugging requirements, see [Extending Sluggable](#extending) below.
+For more complex slugging requirements, see [Extending Sluggable](#extending-sluggable) below.
+
+### onUpdate
+
+By default, updating a model will not try and generate a new slug value.  It is assumed
+that once your slug is generated, you won't want it to change (this may be especially
+true if you are using slugs for URLs and don't want to mess up your SEO mojo).
+
+If you want to regenerate one or more of your model's slug fields, you can set those
+fields to null or an empty string before the update:
+
+```php
+$post->slug = null;
+$post->update(['title' => 'My New Title']);
+```
+
+If this is the behaviour you want every time you update a model, then set the `onUpdate`
+option to true.
 
 ### separator
 
@@ -458,8 +516,8 @@ The package supports a really short configuration syntax, if you are truly lazy:
 public function sluggable() {
     return [
         'slug'
-    ]
-];
+    ];
+}
 ```
 
 This will use all the default options from `app/config/sluggable.php`, use the model's
@@ -562,6 +620,32 @@ However, you are free to overload it in your models.
 
 
 
+## SluggableScopeHelpers Trait
+
+Earlier versions of the package included some helper functions for working with models and their slugs.
+Because you can now have more than one slug per model, this functionality has been refactored into a
+separate trait you can use in your application.
+
+By adding the `SluggableScopeHelpers` trait to your model, you can then do things such as:
+
+```php
+$post = Post::whereSlug($slugString)->get();
+
+$post = Post::findBySlug($slugString);
+
+$post = Post::findBySlugOrFail($slugString);
+```
+
+See [SCOPE-HELPERS.md](SCOPE-HELPERS.md) for all the details.
+
+
+
+## Route Model Binding
+
+See [ROUTE-MODEL-BINDING.md](ROUTE-MODEL-BINDING.md) for details.
+
+
+
 ## Bugs, Suggestions and Contributions
 
 Thanks to [everyone](https://github.com/cviebrock/eloquent-taggable/graphs/contributors)
@@ -571,6 +655,7 @@ Please use [Github](https://github.com/cviebrock/eloquent-sluggable) for reporti
 and making comments or suggestions.
  
 See [CONTRIBUTING.md](CONTRIBUTING.md) for how to contribute changes.
+
 
 
 ## Copyright and License
