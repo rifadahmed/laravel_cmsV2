@@ -1,0 +1,108 @@
+<html>
+    <title>
+        Instruction
+    </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <style>
+    #list{
+          border: none !important;
+    }
+  </style>
+
+
+
+    <body>
+        
+        <div class="container">
+            <ul class="list-group"> <h3 class="text-center">Instructions to run a Laravel project on machine</h3>
+                <li class="list-group-item">
+                    go to C:\Windows\System32\drivers\etc
+                    open <strong>hosts</strong>  as an adminstration
+                    paste the below linnes:     
+                        <xmp>              
+                          127.0.0.1 localhost
+                          127.0.0.1 laravel.test
+                        </xmp> 
+                 
+             
+                </li>
+                <li class="list-group-item">
+                    go to C:\xampp\apache\conf\extra
+                    open <strong>httpd-vhosts.conf</strong> as an adminstration
+                    paste the below lines:
+                    <br>
+                    <xmp> 
+                        <VirtualHost *:80>
+                            DocumentRoot "C:/xampp/htdocs/laravel_test/public"
+                            ServerName laravel.test
+                        </VirtualHost>
+                    </xmp>
+                </li>
+                <li class="list-group-item">
+                    Open xammp start apache and MySQl server > Create DB on PHPmyAdmin>import the Sql file located in this project folder to the DB. > Go to the given URL (EX:laravel.test)
+                    .Check the .env file for db,user name and passsword field.
+            </ul>
+        </div>
+        <br>
+        <div class="container">
+            <ul class="list-group"> <h3 class="text-center">Instruction for Hosting a laravel project in Cpanel</h3>
+                <li class="list-group-item">
+                    Go to file manager and upload the whole project.Move all the files from project's <strong> public</strong> 
+                    folder to <strong>Public_html</strong> folder. For <strong>subdomain hosting</strong> move the files directly to the
+                    <strong>subdomain hosting</strong> folder. subdomain folder will be found in the file manger folder. It will look like <i>cms.rifadahmed.com</i>.
+                    Now open the <strong>index.php</strong> file.Edit these two lines
+                    <xmp>
+                        require __DIR__.'/../bootstrap/autoload.php';
+                        $app = require_once __DIR__.'/../bootstrap/app.php';
+                    </xmp>
+                    To
+                    <xmp>
+                        require __DIR__.'/../your_project folder_name/bootstrap/autoload.php';
+                        $app = require_once __DIR__.'/../your_project folder_name/bootstrap/app.php';
+                    </xmp>
+                    
+                </li>
+                <li class="list-group-item">
+                   Now open mysqldatabases from Cpanel and create a Database.Note down the DB,User name and password.
+                   Now open .env file from project folder and update these fields 
+                   <xmp>
+                    APP_URL=your website URL
+                    DB_DATABASE=name of the DB you created in Cpanel
+                    DB_USERNAME=name of the user associated with that database
+                    DB_PASSWORD=user's password
+                   </xmp>
+                   Now open PhpMyAdmin from Cpanel and import the sql file from pc.
+                </li>
+                <li class="list-group-item">
+                    Common errors and solutions: <br>
+                    <strong>1)Laravel file_put_contents error on shared hosting
+                    </strong>
+
+                    <xmp>
+                        Navigate to your projects /bootstrap/cache/ folder.
+                        Delete the contents of the directory and your good to go
+                    </xmp>
+
+                    <strong>
+                        2)count(): Parameter must be an array or an object that implements Countable
+                    </strong>
+                    <p>Put this code at the beginning your routes file its will work fine</p>
+                    <xmp>
+                        
+                        if(version_compare(PHP_VERSION, '7.2.0', '>=')) {
+                            error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
+                        }
+                    </xmp>
+                </li>
+              
+            </ul>
+
+        </div>
+    </body>
+</html>
+
+
+
