@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 04, 2020 at 07:33 PM
+-- Generation Time: Jul 11, 2020 at 09:12 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 5.6.39
 
@@ -40,8 +40,9 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'Entertainment', '2020-07-01 05:13:04', '2020-07-01 05:13:04'),
-(2, 'Politics', '2020-07-01 05:13:16', '2020-07-01 05:13:16');
+(1, 'Programming', '2020-07-02 15:08:58', '2020-06-15 11:21:14'),
+(2, 'Politics', '2020-06-14 19:24:12', '2020-06-21 20:29:49'),
+(3, 'Entertainment', '2020-06-13 14:41:47', '2020-07-04 11:25:49');
 
 -- --------------------------------------------------------
 
@@ -64,8 +65,7 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`id`, `post_id`, `is_active`, `user_id`, `body`, `created_at`, `updated_at`) VALUES
-(4, 1, 1, 1, 'nice post\r\n', '2020-07-01 06:12:55', '2020-07-01 06:35:35'),
-(5, 1, 1, 1, 'very nice', '2020-07-04 04:34:30', '2020-07-04 04:34:30');
+(6, 6, 1, 7, '      cccccccc', '2020-07-10 09:20:25', '2020-07-10 09:20:25');
 
 -- --------------------------------------------------------
 
@@ -82,13 +82,6 @@ CREATE TABLE `comment_replies` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `comment_replies`
---
-
-INSERT INTO `comment_replies` (`id`, `comment_id`, `is_active`, `user_id`, `body`, `created_at`, `updated_at`) VALUES
-(7, 4, 1, 1, 'oustsanding', '2020-07-01 06:20:00', '2020-07-02 00:11:07');
 
 -- --------------------------------------------------------
 
@@ -147,12 +140,8 @@ CREATE TABLE `photos` (
 --
 
 INSERT INTO `photos` (`id`, `file`, `created_at`, `updated_at`) VALUES
-(1, 'man1.jpg', '2020-07-01 05:12:27', '2020-07-01 05:12:27'),
-(2, 'post4.jpg', '2020-07-01 05:13:58', '2020-07-01 05:13:58'),
-(3, 'post5.jpg', '2020-07-01 06:08:45', '2020-07-01 06:08:45'),
-(4, 'man2.jpg', '2020-07-01 06:10:33', '2020-07-01 06:10:33'),
-(5, '106055839_2692530494356871_2935123927283529272_n.jpg', '2020-07-02 04:40:39', '2020-07-02 04:40:39'),
-(6, '102419782_852201118602689_5862920786999567510_o.jpg', '2020-07-02 04:50:40', '2020-07-02 04:50:40');
+(5, 'man1.jpg', '2020-07-10 09:19:31', '2020-07-10 09:19:31'),
+(7, 'post1.jpg', '2020-07-10 09:20:05', '2020-07-10 09:20:05');
 
 -- --------------------------------------------------------
 
@@ -177,10 +166,7 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`id`, `user_id`, `photo_id`, `category_id`, `title`, `body`, `created_at`, `updated_at`, `slug`) VALUES
-(1, 1, 2, 1, 'cycling', 'there are a lots of benefits of cycling.burns a lot of calories', '2020-07-01 05:13:58', '2020-07-02 04:41:17', 'cycling'),
-(2, 2, 3, 1, 'walk in woods alone', 'I love rainy season very much', '2020-07-01 06:08:45', '2020-07-02 04:55:52', 'walk-in-woods-alone'),
-(3, 1, 5, 1, 'Best horror', 'I love this movie', '2020-07-02 04:40:39', '2020-07-02 04:40:39', 'best-horror'),
-(4, 1, 6, 1, 'jeans', 'dfsdfsad', '2020-07-02 04:50:40', '2020-07-02 04:51:02', 'cycling-1');
+(6, 7, 7, 1, 'x', '<p>xxxxxxxxxx</p>', '2020-07-10 09:20:05', '2020-07-10 09:20:05', 'x');
 
 -- --------------------------------------------------------
 
@@ -200,9 +186,9 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'admin', NULL, NULL),
-(2, 'author', NULL, NULL),
-(3, 'subs', NULL, NULL);
+(1, 'admin', '2020-06-23 01:03:55', '2020-06-25 11:19:52'),
+(2, 'subs', '2020-07-04 13:05:21', '2020-06-18 14:21:41'),
+(3, 'author', '2020-06-18 20:21:14', '2020-06-19 00:15:34');
 
 -- --------------------------------------------------------
 
@@ -228,9 +214,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `role_id`, `is_active`, `email`, `password`, `remember_token`, `created_at`, `updated_at`, `photo_id`) VALUES
-(1, 'rifad', 1, 1, 'rifad.ja@gmail.com', '$2y$10$AEqsyRxd4SHVHDyWYNG7aeXCG1pydDP.QvC21SNHS4o9Q/RSndN2K', 'RKfGt1GH2xmNlKiG065pvT7dbzBMElSXR6emBlJZSay5j5pKYXS8hwAYieTx', '2020-07-01 05:11:20', '2020-07-01 06:41:18', 1),
-(2, 'josh', 1, 1, 'josh@gmail.com', '$2y$10$ikVAo3f17OKFpv5gHZJp5eOwEnrfWcgj0tf8ssldJTP1b7e55ZK0u', '25aLtNm1Sy7Jk6XX9cBPEIxPLJls6a5kxrwe0LRpKXgZMvJzlx2WdmZlqzLd', '2020-07-01 05:14:38', '2020-07-01 06:10:33', 4),
-(3, 'ahmed', 1, 0, 'ahmed@gmail.com', '$2y$10$XEcfKL3SLeiiRxk9yq7JhubFFCTGKYXvswDwio/r9gwMnB10mvVgm', '8tU4ZPx58re6EqySOM7qnzphGVe1pIr7s5L6TLEA1VOdBsAsuO93IGkE9PT4', '2020-07-01 06:41:39', '2020-07-01 06:45:16', 0);
+(7, 'rifad', 1, 1, 'rifad.ja@gmail.com', '$2y$10$EEHEhpzuX/iCgPvUuerqzu0M0tGRKYFSGb4KVW4hcdU6e4xjW95n6', NULL, '2020-07-10 09:18:53', '2020-07-10 09:19:31', 5);
 
 --
 -- Indexes for dumped tables
@@ -296,31 +280,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `comment_replies`
 --
 ALTER TABLE `comment_replies`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `photos`
 --
 ALTER TABLE `photos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -332,7 +316,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
