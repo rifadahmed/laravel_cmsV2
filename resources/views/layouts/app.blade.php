@@ -39,9 +39,7 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    Laravel
-                </a>
+              
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -53,7 +51,7 @@
                 @if (Auth::check() && Auth::user()->role->name=='admin' && Auth::user()->is_active==1)
                 
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('admin/users') }}">Dasboard</a></li>
+                    <li><a href="{{ url('admin')}}">Dasboard</a></li>
                 </ul>  
                 @endif
                

@@ -1,4 +1,5 @@
 @extends('layouts.blog-post')
+<link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@200&display=swap" rel="stylesheet">
 @section('content')
 <div class="col-lg-8">
 
@@ -6,7 +7,7 @@
 
     <!-- Title -->
     
-    <h1>{{$post[0]->title}}</h1>
+    <h1 style="font-family: 'Grenze Gotisch', cursive;">{{$post[0]->title}}</h1> 
 
     <!-- Author -->
     <p class="lead">
@@ -115,9 +116,9 @@
     </div>
         
     </div>
-    
+    @endif 
 </div>
-@endif
+
 @endsection
 
 

@@ -12,9 +12,9 @@
     <title>Blog Post - Start Bootstrap Template</title>
 
     <link href="{{asset('css/app.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{asset('css/myStyle.css')}}" rel="stylesheet">
-
+    
     <link href="{{asset('css/libs.css')}}" rel="stylesheet">
+    <link href="{{asset('css/myStyle.css')}}" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -37,19 +37,18 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Start Bootstrap</a>
+                <a class="navbar-brand" href="{{url('home')}}">Home</a>
+                <a class="navbar-brand" href="{{url('admin')}}">Dashboard</a>
+               
+                
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
+            <div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav float-right" id="post_nav">
+                   
+                   
                     <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
+                        <a href="{{url('logout')}}">Logout</a>
                     </li>
                 </ul>
             </div>

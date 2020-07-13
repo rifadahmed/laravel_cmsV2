@@ -16,16 +16,18 @@ if(version_compare(PHP_VERSION, '7.2.0', '>=')) {
     error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
 }
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
 Route::auth();
 Route::get('/logout', 'Auth\LoginController@logout');
-Route::get('post/{id}',['as'=>'home.post','uses'=>'adminPostsController@post']);
+
 
 Route::group(['middleware' => 'admin'], function () {
     Route::get('admin', 'AdminController@index');
+    Route::get('post/{id}',['as'=>'home.post','uses'=>'adminPostsController@post']);
     Route::resource('admin/users','adminUsersController',['names'=>[
         'index'=>'admin.users.index',
         'show'=>'admin.users.show',

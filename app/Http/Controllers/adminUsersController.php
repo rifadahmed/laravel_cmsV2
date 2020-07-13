@@ -141,8 +141,12 @@ class adminUsersController extends Controller
             $x->delete();//deleting post
          }
          $user->delete(); //deleting user
-         $user->photo->delete();//deleting user photo
-         unlink($userPhoto);//deleting user photo from directory 
+         if($user->photo)
+         {
+            $user->photo->delete();//deleting user photo
+            unlink($userPhoto);//deleting user photo from directory 
+         }
+        
 
           
 

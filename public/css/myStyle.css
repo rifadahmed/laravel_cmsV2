@@ -4,3 +4,6 @@
   .hide{
       display: none;
   }
+  #post_nav{
+      float: right;
+  }
